@@ -1,0 +1,2549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="description" content="Student Marketplace — Everything Students Need. One Marketplace.">
+<meta name="theme-color" content="#07111f">
+<title>Student Marketplace | Everything Students Need</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* =========================================================
+   STUDENT MARKETPLACE
+   SINGLE FILE: HTML + CSS + JAVASCRIPT
+   ========================================================= */
+
+:root{
+    --bg:#07111f;
+    --bg2:#0b1728;
+    --card:rgba(255,255,255,.065);
+    --card2:rgba(255,255,255,.095);
+    --text:#f5f8ff;
+    --muted:#a9b6c9;
+    --primary:#6c63ff;
+    --primary2:#8b7cff;
+    --cyan:#20d9ff;
+    --green:#35e6a1;
+    --border:rgba(255,255,255,.10);
+    --shadow:0 25px 70px rgba(0,0,0,.35);
+    --radius:24px;
+    --max:1180px;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:"Inter",sans-serif;
+    background:
+        radial-gradient(circle at 10% 10%,rgba(108,99,255,.13),transparent 28%),
+        radial-gradient(circle at 90% 30%,rgba(32,217,255,.09),transparent 25%),
+        var(--bg);
+    color:var(--text);
+    overflow-x:hidden;
+    line-height:1.65;
+}
+
+body.light{
+    --bg:#f5f7fb;
+    --bg2:#ffffff;
+    --card:rgba(0,0,0,.045);
+    --card2:rgba(0,0,0,.07);
+    --text:#101828;
+    --muted:#5c6678;
+    --border:rgba(0,0,0,.09);
+    --shadow:0 20px 60px rgba(20,30,50,.12);
+    background:
+        radial-gradient(circle at 10% 10%,rgba(108,99,255,.09),transparent 28%),
+        #f5f7fb;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+button{
+    font-family:inherit;
+}
+
+.container{
+    width:min(92%,var(--max));
+    margin:auto;
+}
+
+section{
+    padding:100px 0;
+    position:relative;
+}
+
+.section-label{
+    color:var(--cyan);
+    font-size:.78rem;
+    font-weight:800;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin-bottom:13px;
+}
+
+.section-title{
+    font-family:"Manrope",sans-serif;
+    font-size:clamp(2rem,5vw,3.35rem);
+    line-height:1.1;
+    letter-spacing:-1.5px;
+    max-width:760px;
+    margin-bottom:18px;
+}
+
+.section-text{
+    color:var(--muted);
+    max-width:700px;
+    font-size:1rem;
+}
+
+.gradient-text{
+    background:linear-gradient(90deg,var(--primary2),var(--cyan));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+/* ================= HEADER ================= */
+
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:1000;
+    padding:16px 0;
+    transition:.35s ease;
+}
+
+header.scrolled{
+    padding:10px 0;
+    background:rgba(7,17,31,.78);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid var(--border);
+}
+
+body.light header.scrolled{
+    background:rgba(255,255,255,.82);
+}
+
+.nav{
+    height:58px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-weight:900;
+    letter-spacing:-.5px;
+    font-size:1.05rem;
+}
+
+.logo-mark{
+    width:39px;
+    height:39px;
+    border-radius:12px;
+    display:grid;
+    place-items:center;
+    background:linear-gradient(135deg,var(--primary),var(--cyan));
+    box-shadow:0 8px 30px rgba(108,99,255,.3);
+    color:white;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:27px;
+}
+
+.nav-links a{
+    color:var(--muted);
+    font-size:.88rem;
+    font-weight:600;
+    transition:.25s;
+}
+
+.nav-links a:hover{
+    color:var(--text);
+}
+
+.nav-actions{
+    display:flex;
+    align-items:center;
+    gap:9px;
+}
+
+.icon-btn{
+    width:40px;
+    height:40px;
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+    border-radius:12px;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.icon-btn:hover{
+    transform:translateY(-2px);
+    background:var(--card2);
+}
+
+.menu-btn{
+    display:none;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    padding-top:120px;
+    overflow:hidden;
+}
+
+.hero-grid{
+    display:grid;
+    grid-template-columns:1.08fr .92fr;
+    gap:55px;
+    align-items:center;
+}
+
+.hero-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 13px;
+    border:1px solid var(--border);
+    background:var(--card);
+    border-radius:100px;
+    color:#d8deeb;
+    font-size:.78rem;
+    font-weight:700;
+    margin-bottom:24px;
+    animation:fadeDown .8s ease both;
+}
+
+.pulse-dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:var(--green);
+    box-shadow:0 0 0 0 rgba(53,230,161,.6);
+    animation:pulse 2s infinite;
+}
+
+.hero h1{
+    font-family:"Manrope",sans-serif;
+    font-size:clamp(3rem,7vw,6rem);
+    line-height:.98;
+    letter-spacing:-4px;
+    max-width:760px;
+    animation:heroIn .9s .1s ease both;
+}
+
+.hero-description{
+    margin-top:24px;
+    color:var(--muted);
+    max-width:650px;
+    font-size:1.08rem;
+    animation:heroIn .9s .2s ease both;
+}
+
+.hero-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:13px;
+    margin-top:32px;
+    animation:heroIn .9s .3s ease both;
+}
+
+.btn{
+    border:0;
+    cursor:pointer;
+    padding:14px 21px;
+    border-radius:14px;
+    font-weight:800;
+    font-size:.9rem;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+    transition:.3s ease;
+}
+
+.btn-primary{
+    color:white;
+    background:linear-gradient(135deg,var(--primary),#5148ed);
+    box-shadow:0 12px 35px rgba(108,99,255,.3);
+}
+
+.btn-primary:hover{
+    transform:translateY(-4px);
+    box-shadow:0 18px 45px rgba(108,99,255,.42);
+}
+
+.btn-outline{
+    color:var(--text);
+    background:var(--card);
+    border:1px solid var(--border);
+}
+
+.btn-outline:hover{
+    transform:translateY(-4px);
+    background:var(--card2);
+}
+
+/* Hero visual */
+
+.hero-visual{
+    position:relative;
+    min-height:500px;
+    display:grid;
+    place-items:center;
+    animation:visualIn 1s .25s ease both;
+}
+
+.orb{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(2px);
+    animation:float 7s ease-in-out infinite;
+}
+
+.orb.one{
+    width:230px;
+    height:230px;
+    background:rgba(108,99,255,.20);
+    top:25px;
+    right:20px;
+}
+
+.orb.two{
+    width:180px;
+    height:180px;
+    background:rgba(32,217,255,.15);
+    bottom:30px;
+    left:30px;
+    animation-delay:-2s;
+}
+
+.market-card{
+    width:min(100%,430px);
+    background:rgba(15,27,46,.78);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:30px;
+    padding:18px;
+    box-shadow:var(--shadow);
+    backdrop-filter:blur(20px);
+    transform:rotate(2deg);
+    position:relative;
+    z-index:2;
+}
+
+body.light .market-card{
+    background:rgba(255,255,255,.85);
+}
+
+.market-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:16px;
+}
+
+.market-title{
+    font-weight:800;
+}
+
+.live{
+    color:var(--green);
+    font-size:.7rem;
+    font-weight:800;
+}
+
+.product-preview{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.preview-item{
+    border:1px solid var(--border);
+    background:var(--card);
+    border-radius:18px;
+    padding:11px;
+    transition:.3s;
+}
+
+.preview-item:hover{
+    transform:translateY(-5px) rotate(-1deg);
+}
+
+.preview-image{
+    height:125px;
+    border-radius:13px;
+    display:grid;
+    place-items:center;
+    font-size:2.5rem;
+    margin-bottom:10px;
+    background:
+        linear-gradient(135deg,rgba(108,99,255,.25),rgba(32,217,255,.12));
+}
+
+.preview-name{
+    font-weight:700;
+    font-size:.82rem;
+}
+
+.preview-price{
+    color:var(--cyan);
+    font-size:.78rem;
+    font-weight:800;
+    margin-top:3px;
+}
+
+.floating-pill{
+    position:absolute;
+    z-index:3;
+    padding:11px 14px;
+    border:1px solid var(--border);
+    background:rgba(13,24,41,.9);
+    backdrop-filter:blur(12px);
+    border-radius:15px;
+    font-size:.75rem;
+    font-weight:800;
+    box-shadow:0 15px 35px rgba(0,0,0,.2);
+    animation:float 5s ease-in-out infinite;
+}
+
+body.light .floating-pill{
+    background:rgba(255,255,255,.9);
+}
+
+.pill-one{
+    left:0;
+    top:90px;
+}
+
+.pill-two{
+    right:-5px;
+    bottom:80px;
+    animation-delay:-1.5s;
+}
+
+.pill-three{
+    left:40px;
+    bottom:5px;
+    animation-delay:-3s;
+}
+
+/* ================= STATS ================= */
+
+.stats{
+    padding:0 0 50px;
+}
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.stat{
+    padding:23px;
+    border:1px solid var(--border);
+    background:var(--card);
+    border-radius:20px;
+    text-align:center;
+    transition:.3s;
+}
+
+.stat:hover{
+    transform:translateY(-6px);
+    background:var(--card2);
+}
+
+.stat-number{
+    font-size:2rem;
+    font-weight:900;
+    font-family:"Manrope";
+}
+
+.stat-label{
+    color:var(--muted);
+    font-size:.78rem;
+    margin-top:2px;
+}
+
+/* ================= ABOUT ================= */
+
+.about-grid{
+    display:grid;
+    grid-template-columns:.85fr 1.15fr;
+    gap:65px;
+    align-items:center;
+}
+
+.about-visual{
+    position:relative;
+}
+
+.about-box{
+    border:1px solid var(--border);
+    background:var(--card);
+    padding:32px;
+    border-radius:30px;
+    box-shadow:var(--shadow);
+}
+
+.about-icon{
+    width:65px;
+    height:65px;
+    display:grid;
+    place-items:center;
+    border-radius:20px;
+    background:linear-gradient(135deg,rgba(108,99,255,.25),rgba(32,217,255,.12));
+    font-size:1.8rem;
+    margin-bottom:20px;
+}
+
+.quote{
+    margin-top:25px;
+    padding:20px;
+    border-left:3px solid var(--primary);
+    color:#d9e0ec;
+    background:rgba(255,255,255,.025);
+    border-radius:0 15px 15px 0;
+    font-weight:600;
+}
+
+/* ================= CATEGORIES ================= */
+
+.category-grid{
+    margin-top:45px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.category{
+    position:relative;
+    overflow:hidden;
+    min-height:190px;
+    padding:26px;
+    border:1px solid var(--border);
+    border-radius:25px;
+    background:linear-gradient(145deg,var(--card),rgba(255,255,255,.025));
+    transition:.4s ease;
+}
+
+.category::after{
+    content:"";
+    position:absolute;
+    width:130px;
+    height:130px;
+    border-radius:50%;
+    background:rgba(108,99,255,.11);
+    right:-45px;
+    bottom:-55px;
+    transition:.4s;
+}
+
+.category:hover{
+    transform:translateY(-8px);
+    border-color:rgba(108,99,255,.4);
+}
+
+.category:hover::after{
+    transform:scale(1.7);
+}
+
+.category-icon{
+    width:50px;
+    height:50px;
+    display:grid;
+    place-items:center;
+    background:var(--card2);
+    border-radius:15px;
+    font-size:1.4rem;
+    margin-bottom:20px;
+}
+
+.category h3{
+    font-size:1rem;
+    margin-bottom:5px;
+}
+
+.category p{
+    color:var(--muted);
+    font-size:.82rem;
+    max-width:280px;
+}
+
+/* ================= HOW ================= */
+
+.steps{
+    margin-top:50px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.step{
+    padding:28px;
+    border:1px solid var(--border);
+    border-radius:25px;
+    background:var(--card);
+    position:relative;
+    transition:.35s;
+}
+
+.step:hover{
+    transform:translateY(-7px);
+}
+
+.step-number{
+    font-size:.72rem;
+    font-weight:900;
+    color:var(--cyan);
+    letter-spacing:2px;
+    margin-bottom:28px;
+}
+
+.step-icon{
+    font-size:2rem;
+    margin-bottom:15px;
+}
+
+.step h3{
+    margin-bottom:7px;
+}
+
+.step p{
+    color:var(--muted);
+    font-size:.87rem;
+}
+
+/* ================= AUDIENCE ================= */
+
+.audience-grid{
+    margin-top:45px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.audience{
+    padding:35px;
+    border-radius:28px;
+    border:1px solid var(--border);
+    background:var(--card);
+    transition:.35s;
+}
+
+.audience:hover{
+    transform:translateY(-6px);
+}
+
+.audience h3{
+    font-size:1.35rem;
+    margin-bottom:12px;
+}
+
+.audience p{
+    color:var(--muted);
+    margin-bottom:20px;
+}
+
+.check-list{
+    display:grid;
+    gap:10px;
+}
+
+.check{
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+    color:#dce4f2;
+    font-size:.87rem;
+}
+
+body.light .check{
+    color:var(--text);
+}
+
+.check span{
+    color:var(--green);
+    font-weight:900;
+}
+
+/* ================= FOUNDER ================= */
+
+.founder-grid{
+    display:grid;
+    grid-template-columns:.7fr 1.3fr;
+    gap:55px;
+    align-items:center;
+}
+
+.founder-photo-wrap{
+    position:relative;
+    width:min(100%,340px);
+    margin:auto;
+}
+
+.founder-photo-wrap::before{
+    content:"";
+    position:absolute;
+    inset:-12px;
+    border-radius:35px;
+    background:linear-gradient(135deg,var(--primary),var(--cyan));
+    opacity:.35;
+    filter:blur(22px);
+    animation:glow 4s ease-in-out infinite;
+}
+
+.founder-photo{
+    position:relative;
+    z-index:2;
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    border-radius:30px;
+    border:1px solid var(--border);
+    display:block;
+    background:var(--card);
+}
+
+.founder-tag{
+    position:absolute;
+    z-index:3;
+    bottom:18px;
+    left:18px;
+    right:18px;
+    padding:15px;
+    border-radius:18px;
+    background:rgba(5,12,23,.78);
+    backdrop-filter:blur(15px);
+    border:1px solid rgba(255,255,255,.12);
+}
+
+.founder-tag strong{
+    display:block;
+}
+
+.founder-tag span{
+    color:#b8c3d4;
+    font-size:.75rem;
+}
+
+/* ================= VISION ================= */
+
+.vision{
+    text-align:center;
+}
+
+.vision-card{
+    max-width:950px;
+    margin:40px auto 0;
+    padding:65px 40px;
+    border-radius:35px;
+    border:1px solid var(--border);
+    background:
+        radial-gradient(circle at 50% 0,rgba(108,99,255,.18),transparent 50%),
+        var(--card);
+    box-shadow:var(--shadow);
+}
+
+.vision-card h3{
+    font-family:"Manrope";
+    font-size:clamp(1.8rem,5vw,3rem);
+    line-height:1.2;
+    max-width:800px;
+    margin:auto;
+}
+
+.vision-card p{
+    color:var(--muted);
+    max-width:650px;
+    margin:20px auto 0;
+}
+
+/* ================= FAQ ================= */
+
+.faq-list{
+    max-width:850px;
+    margin:45px auto 0;
+    display:grid;
+    gap:12px;
+}
+
+.faq{
+    border:1px solid var(--border);
+    border-radius:18px;
+    overflow:hidden;
+    background:var(--card);
+}
+
+.faq-question{
+    width:100%;
+    border:0;
+    background:transparent;
+    color:var(--text);
+    padding:20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    text-align:left;
+    font-weight:800;
+    cursor:pointer;
+}
+
+.faq-question span:last-child{
+    font-size:1.3rem;
+    transition:.3s;
+}
+
+.faq-answer{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .4s ease;
+}
+
+.faq-answer p{
+    color:var(--muted);
+    padding:0 20px 20px;
+    font-size:.9rem;
+}
+
+.faq.active .faq-question span:last-child{
+    transform:rotate(45deg);
+}
+
+/* ================= CTA ================= */
+
+.cta{
+    padding-bottom:100px;
+}
+
+.cta-card{
+    position:relative;
+    overflow:hidden;
+    padding:70px 35px;
+    text-align:center;
+    border-radius:35px;
+    border:1px solid var(--border);
+    background:
+        radial-gradient(circle at 20% 30%,rgba(108,99,255,.22),transparent 30%),
+        radial-gradient(circle at 80% 70%,rgba(32,217,255,.13),transparent 30%),
+        var(--card);
+}
+
+.cta-card h2{
+    font-family:"Manrope";
+    font-size:clamp(2rem,5vw,3.5rem);
+    line-height:1.1;
+}
+
+.cta-card p{
+    color:var(--muted);
+    max-width:650px;
+    margin:17px auto 27px;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    border-top:1px solid var(--border);
+    padding:35px 0;
+}
+
+.footer-grid{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.footer-copy{
+    color:var(--muted);
+    font-size:.78rem;
+}
+
+.footer-links{
+    display:flex;
+    gap:18px;
+}
+
+.footer-links a{
+    color:var(--muted);
+    font-size:.78rem;
+}
+
+.footer-links a:hover{
+    color:var(--text);
+}
+
+/* ================= SCROLL TOP ================= */
+
+.scroll-top{
+    position:fixed;
+    right:18px;
+    bottom:18px;
+    width:44px;
+    height:44px;
+    border:1px solid var(--border);
+    border-radius:14px;
+    background:var(--card2);
+    color:var(--text);
+    cursor:pointer;
+    z-index:900;
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(15px);
+    transition:.3s;
+    backdrop-filter:blur(12px);
+}
+
+.scroll-top.show{
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0);
+}
+
+/* ================= REVEAL ================= */
+
+.reveal{
+    opacity:0;
+    transform:translateY(35px);
+    transition:opacity .8s ease, transform .8s ease;
+}
+
+.reveal.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* ================= ANIMATIONS ================= */
+
+@keyframes heroIn{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes visualIn{
+    from{
+        opacity:0;
+        transform:translateX(40px) scale(.95);
+    }
+    to{
+        opacity:1;
+        transform:translateX(0) scale(1);
+    }
+}
+
+@keyframes fadeDown{
+    from{
+        opacity:0;
+        transform:translateY(-15px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes float{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-15px)}
+}
+
+@keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(53,230,161,.6)}
+    70%{box-shadow:0 0 0 10px rgba(53,230,161,0)}
+    100%{box-shadow:0 0 0 0 rgba(53,230,161,0)}
+}
+
+@keyframes glow{
+    0%,100%{opacity:.25;transform:scale(.98)}
+    50%{opacity:.5;transform:scale(1.03)}
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:900px){
+
+    .nav-links{
+        position:absolute;
+        top:70px;
+        left:4%;
+        width:92%;
+        padding:15px;
+        display:none;
+        flex-direction:column;
+        align-items:stretch;
+        gap:5px;
+        border:1px solid var(--border);
+        background:rgba(9,20,35,.96);
+        backdrop-filter:blur(20px);
+        border-radius:18px;
+        box-shadow:var(--shadow);
+    }
+
+    body.light .nav-links{
+        background:rgba(255,255,255,.97);
+    }
+
+    .nav-links.open{
+        display:flex;
+        animation:menuIn .3s ease;
+    }
+
+    .nav-links a{
+        padding:13px;
+        border-radius:10px;
+    }
+
+    .nav-links a:hover{
+        background:var(--card);
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    .hero-grid,
+    .about-grid,
+    .founder-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero{
+        padding-top:130px;
+    }
+
+    .hero h1{
+        letter-spacing:-2.5px;
+    }
+
+    .hero-visual{
+        min-height:430px;
+    }
+
+    .stats-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .category-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .steps{
+        grid-template-columns:1fr;
+    }
+
+    .audience-grid{
+        grid-template-columns:1fr;
+    }
+
+    .about-visual{
+        order:2;
+    }
+
+    .founder-photo-wrap{
+        width:min(100%,300px);
+    }
+
+    section{
+        padding:80px 0;
+    }
+}
+
+@media(max-width:560px){
+
+    .container{
+        width:min(91%,var(--max));
+    }
+
+    .nav{
+        height:52px;
+    }
+
+    .logo{
+        font-size:.88rem;
+    }
+
+    .logo-mark{
+        width:35px;
+        height:35px;
+        border-radius:10px;
+    }
+
+    .nav-actions{
+        gap:5px;
+    }
+
+    .icon-btn{
+        width:36px;
+        height:36px;
+        border-radius:10px;
+    }
+
+    .hero{
+        min-height:auto;
+        padding-top:125px;
+        padding-bottom:55px;
+    }
+
+    .hero h1{
+        font-size:clamp(2.65rem,13vw,4rem);
+        letter-spacing:-2.7px;
+    }
+
+    .hero-description{
+        font-size:.94rem;
+    }
+
+    .hero-buttons{
+        flex-direction:column;
+    }
+
+    .btn{
+        width:100%;
+    }
+
+    .hero-visual{
+        min-height:360px;
+    }
+
+    .market-card{
+        transform:none;
+        padding:13px;
+        border-radius:22px;
+    }
+
+    .preview-image{
+        height:95px;
+    }
+
+    .floating-pill{
+        font-size:.64rem;
+        padding:8px 10px;
+    }
+
+    .pill-one{
+        left:-4px;
+        top:55px;
+    }
+
+    .pill-two{
+        right:-3px;
+        bottom:55px;
+    }
+
+    .pill-three{
+        left:15px;
+        bottom:0;
+    }
+
+    .stats-grid{
+        gap:9px;
+    }
+
+    .stat{
+        padding:17px 8px;
+        border-radius:16px;
+    }
+
+    .stat-number{
+        font-size:1.5rem;
+    }
+
+    .category-grid{
+        grid-template-columns:1fr;
+        gap:12px;
+    }
+
+    .category{
+        min-height:155px;
+        padding:22px;
+    }
+
+    .section-title{
+        font-size:2rem;
+    }
+
+    .about-box,
+    .audience,
+    .step{
+        padding:24px;
+    }
+
+    .vision-card{
+        padding:45px 22px;
+        border-radius:25px;
+    }
+
+    .cta-card{
+        padding:50px 20px;
+        border-radius:25px;
+    }
+
+    .footer-grid{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .footer-links{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+}
+
+@keyframes menuIn{
+    from{
+        opacity:0;
+        transform:translateY(-8px) scale(.98);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+@media(prefers-reduced-motion:reduce){
+    *,
+    *::before,
+    *::after{
+        animation-duration:.01ms!important;
+        animation-iteration-count:1!important;
+        scroll-behavior:auto!important;
+        transition-duration:.01ms!important;
+    }
+}
+
+  /* ================= CONTACT & COMING SOON ================= */
+
+.btn-whatsapp{
+    color:#fff;
+    background:linear-gradient(135deg,#18c96e,#0aa957);
+    box-shadow:0 12px 35px rgba(24,201,110,.22);
+}
+
+.btn-whatsapp:hover{
+    transform:translateY(-4px);
+    box-shadow:0 18px 45px rgba(24,201,110,.35);
+}
+
+.btn-coming{
+    color:var(--text);
+    background:var(--card);
+    border:1px solid rgba(108,99,255,.35);
+}
+
+.btn-coming:hover{
+    transform:translateY(-4px);
+    border-color:var(--primary);
+}
+
+/* Coming Soon Modal */
+
+.coming-overlay{
+    position:fixed;
+    inset:0;
+    z-index:3000;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:rgba(2,8,18,.75);
+    backdrop-filter:blur(12px);
+}
+
+.coming-overlay.show{
+    display:flex;
+    animation:overlayIn .3s ease;
+}
+
+.coming-modal{
+    width:min(100%,430px);
+    padding:35px 25px;
+    text-align:center;
+    border:1px solid var(--border);
+    border-radius:28px;
+    background:var(--bg2);
+    box-shadow:0 30px 90px rgba(0,0,0,.45);
+    animation:modalIn .45s cubic-bezier(.2,.8,.2,1);
+}
+
+.coming-icon{
+    width:75px;
+    height:75px;
+    margin:0 auto 20px;
+    display:grid;
+    place-items:center;
+    border-radius:22px;
+    font-size:2rem;
+    background:linear-gradient(
+        135deg,
+        rgba(108,99,255,.25),
+        rgba(32,217,255,.12)
+    );
+}
+
+.coming-modal h3{
+    font-family:"Manrope",sans-serif;
+    font-size:1.7rem;
+    margin-bottom:10px;
+}
+
+.coming-modal p{
+    color:var(--muted);
+    font-size:.9rem;
+    margin-bottom:22px;
+}
+
+.coming-close{
+    width:100%;
+    border:0;
+    padding:13px;
+    border-radius:13px;
+    background:linear-gradient(135deg,var(--primary),#5148ed);
+    color:#fff;
+    font-weight:800;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.coming-close:hover{
+    transform:translateY(-2px);
+}
+
+@keyframes overlayIn{
+    from{
+        opacity:0;
+    }
+    to{
+        opacity:1;
+    }
+}
+
+@keyframes modalIn{
+    from{
+        opacity:0;
+        transform:translateY(30px) scale(.94);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header id="header">
+    <div class="container nav">
+
+        <a href="#home" class="logo">
+            <span class="logo-mark">SM</span>
+            <span>Student Marketplace</span>
+        </a>
+
+        <nav class="nav-links" id="navLinks">
+            <a href="#home" data-en="Home" data-sw="Mwanzo">Home</a>
+            <a href="#about" data-en="About" data-sw="Kuhusu">About</a>
+            <a href="#categories" data-en="Categories" data-sw="Makundi">Categories</a>
+            <a href="#how" data-en="How It Works" data-sw="Inavyofanya Kazi">How It Works</a>
+            <a href="#founder" data-en="Founder" data-sw="Mwanzilishi">Founder</a>
+            <a href="#faq">FAQ</a>
+        </nav>
+
+        <div class="nav-actions">
+            <button class="icon-btn" id="langBtn" aria-label="Change language">SW</button>
+            <button class="icon-btn" id="themeBtn" aria-label="Change theme">☾</button>
+            <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+        </div>
+
+    </div>
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<main>
+
+<section class="hero" id="home">
+    <div class="container hero-grid">
+
+        <div>
+            <div class="hero-badge">
+                <span class="pulse-dot"></span>
+                <span data-en="A marketplace built around student life"
+                      data-sw="Marketplace iliyojengwa kwa maisha ya mwanafunzi">
+                    A marketplace built around student life
+                </span>
+            </div>
+
+            <h1>
+                <span data-en="Everything Students Need."
+                      data-sw="Kila Kitu Mwanafunzi Anachohitaji.">
+                    Everything Students Need.
+                </span>
+                <br>
+                <span class="gradient-text"
+                      data-en="One Marketplace."
+                      data-sw="Marketplace Moja.">
+                    One Marketplace.
+                </span>
+            </h1>
+
+            <p class="hero-description"
+               data-en="A modern platform designed to connect students with products, services, opportunities and solutions that make everyday student life easier."
+               data-sw="Platform ya kisasa iliyoundwa kuwaunganisha wanafunzi na bidhaa, huduma, fursa na solutions zinazorahisisha maisha ya kila siku ya mwanafunzi.">
+                A modern platform designed to connect students with products,
+                services, opportunities and solutions that make everyday student life easier.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#categories" class="btn btn-primary">
+                    <span data-en="Explore the Idea" data-sw="Gundua Wazo">Explore the Idea</span>
+                    →
+                </a>
+
+                <a href="#how" class="btn btn-outline">
+                    ▶
+                    <span data-en="How It Works" data-sw="Inavyofanya Kazi">How It Works</span>
+                </a>
+              <a href="https://wa.me/255718170176?text=Hello%20Student%20Marketplace,%20I%20would%20like%20to%20know%20more%20about%20the%20platform."
+   target="_blank"
+   rel="noopener"
+   class="btn btn-whatsapp">
+    💬
+    <span data-en="Chat on WhatsApp"
+          data-sw="Wasiliana WhatsApp">
+        Chat on WhatsApp
+    </span>
+</a>
+
+<button class="btn btn-coming" onclick="showComingSoon()">
+    🚀
+    <span data-en="Join Student Marketplace"
+          data-sw="Jiunge na Student Marketplace">
+        Join Student Marketplace
+    </span>
+</button>
+            </div>
+        </div>
+
+
+        <div class="hero-visual">
+
+            <div class="orb one"></div>
+            <div class="orb two"></div>
+
+            <div class="floating-pill pill-one">📚 Student Essentials</div>
+            <div class="floating-pill pill-two">💼 Student Opportunities</div>
+            <div class="floating-pill pill-three">🧑‍💻 Student Services</div>
+
+            <div class="market-card">
+
+                <div class="market-top">
+                    <div class="market-title">Student Marketplace</div>
+                    <div class="live">● LIVE IDEA</div>
+                </div>
+
+                <div class="product-preview">
+
+                    <div class="preview-item">
+                        <div class="preview-image">💻</div>
+                        <div class="preview-name">Laptop & Tech</div>
+                        <div class="preview-price">Student Deals</div>
+                    </div>
+
+                    <div class="preview-item">
+                        <div class="preview-image">📚</div>
+                        <div class="preview-name">Books & Notes</div>
+                        <div class="preview-price">Academic</div>
+                    </div>
+
+                    <div class="preview-item">
+                        <div class="preview-image">👕</div>
+                        <div class="preview-name">Fashion</div>
+                        <div class="preview-price">Student Style</div>
+                    </div>
+
+                    <div class="preview-item">
+                        <div class="preview-image">🧑‍💻</div>
+                        <div class="preview-name">Services</div>
+                        <div class="preview-price">Student Skills</div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ================= STATS ================= -->
+
+<section class="stats">
+    <div class="container stats-grid">
+
+        <div class="stat reveal">
+            <div class="stat-number" data-count="6">0</div>
+            <div class="stat-label" data-en="Core Marketplace Areas" data-sw="Maeneo Makuu ya Marketplace">Core Marketplace Areas</div>
+        </div>
+
+        <div class="stat reveal">
+            <div class="stat-number" data-count="100">0+</div>
+            <div class="stat-label" data-en="Possible Student Needs" data-sw="Mahitaji Mengi ya Wanafunzi">Possible Student Needs</div>
+        </div>
+
+        <div class="stat reveal">
+            <div class="stat-number" data-count="1">0</div>
+            <div class="stat-label" data-en="Connected Platform" data-sw="Platform Moja Iliyounganishwa">Connected Platform</div>
+        </div>
+
+        <div class="stat reveal">
+            <div class="stat-number">∞</div>
+            <div class="stat-label" data-en="Opportunities to Connect" data-sw="Fursa za Kuunganishwa">Opportunities to Connect</div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ================= ABOUT PLATFORM ================= -->
+
+<section id="about">
+    <div class="container about-grid">
+
+        <div class="about-visual reveal">
+            <div class="about-box">
+                <div class="about-icon">🚀</div>
+
+                <h3 data-en="More Than a Marketplace"
+                    data-sw="Zaidi ya Marketplace">
+                    More Than a Marketplace
+                </h3>
+
+                <p class="section-text" style="margin-top:12px"
+                   data-en="Student Marketplace is designed around the real needs, skills and opportunities that exist within student communities."
+                   data-sw="Student Marketplace imejengwa kuzunguka mahitaji, uwezo na fursa halisi zinazopatikana ndani ya communities za wanafunzi.">
+                    Student Marketplace is designed around the real needs,
+                    skills and opportunities that exist within student communities.
+                </p>
+
+                <div class="quote"
+                     data-en="Your needs can find a solution. Your skills can find an opportunity. Your unused items can find a new owner."
+                     data-sw="Mahitaji yako yanaweza kupata solution. Uwezo wako unaweza kupata fursa. Na vitu usivyovitumia vinaweza kupata owner mpya.">
+                    Your needs can find a solution. Your skills can find an opportunity.
+                    Your unused items can find a new owner.
+                </div>
+            </div>
+        </div>
+
+
+        <div class="reveal">
+            <div class="section-label"
+                 data-en="ABOUT THE PLATFORM"
+                 data-sw="KUHUSU PLATFORM">
+                ABOUT THE PLATFORM
+            </div>
+
+            <h2 class="section-title">
+                <span data-en="Built for the way"
+                      data-sw="Imejengwa kulingana na jinsi">
+                    Built for the way
+                </span>
+                <span class="gradient-text"
+                      data-en="students live."
+                      data-sw="wanafunzi wanavyoishi.">
+                    students live.
+                </span>
+            </h2>
+
+            <p class="section-text"
+               data-en="Students buy things. Students sell things. Students offer skills. Students search for opportunities. Yet these activities are often scattered across different places and platforms."
+               data-sw="Wanafunzi hununua vitu. Wanafunzi huuza vitu. Wanafunzi hutoa huduma kwa kutumia skills zao. Wanafunzi hutafuta fursa. Lakini mara nyingi shughuli hizi zinakuwa zimetawanyika kwenye sehemu na platforms tofauti.">
+                Students buy things. Students sell things. Students offer skills.
+                Students search for opportunities. Yet these activities are often
+                scattered across different places and platforms.
+            </p>
+
+            <p class="section-text" style="margin-top:18px"
+               data-en="Student Marketplace brings this idea together into one student-focused digital space — a place where needs meet solutions, skills meet opportunities, and students can create value for one another."
+               data-sw="Student Marketplace inaleta wazo hili pamoja katika digital space moja maalumu kwa wanafunzi — sehemu ambayo mahitaji yanakutana na solutions, skills zinakutana na fursa, na wanafunzi wanaweza kupeana thamani.">
+                Student Marketplace brings this idea together into one student-focused
+                digital space — a place where needs meet solutions, skills meet opportunities,
+                and students can create value for one another.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ================= CATEGORIES ================= -->
+
+<section id="categories">
+    <div class="container">
+
+        <div class="reveal">
+            <div class="section-label"
+                 data-en="WHAT CAN BE FOUND?"
+                 data-sw="NINI KINAPATIKANA?">
+                WHAT CAN BE FOUND?
+            </div>
+
+            <h2 class="section-title">
+                <span data-en="One place,"
+                      data-sw="Sehemu moja,">
+                    One place,
+                </span>
+                <span class="gradient-text"
+                      data-en="many possibilities."
+                      data-sw="possibilities nyingi.">
+                    many possibilities.
+                </span>
+            </h2>
+
+            <p class="section-text"
+               data-en="The platform can grow with student needs, making it possible to discover products, services and opportunities from one convenient place."
+               data-sw="Platform inaweza kukua pamoja na mahitaji ya wanafunzi, na kufanya iwe rahisi kugundua bidhaa, huduma na fursa kutoka sehemu moja.">
+                The platform can grow with student needs, making it possible to discover
+                products, services and opportunities from one convenient place.
+            </p>
+        </div>
+
+
+        <div class="category-grid">
+
+            <div class="category reveal">
+                <div class="category-icon">📚</div>
+                <h3 data-en="Books & Academic" data-sw="Vitabu na Academic">Books & Academic</h3>
+                <p data-en="Books, calculators, lab equipment, notes and other academic essentials."
+                   data-sw="Vitabu, calculators, vifaa vya maabara, notes na mahitaji mengine ya kitaaluma.">
+                    Books, calculators, lab equipment, notes and other academic essentials.
+                </p>
+            </div>
+
+            <div class="category reveal">
+                <div class="category-icon">💻</div>
+                <h3 data-en="Electronics & Tech" data-sw="Electronics na Tech">Electronics & Tech</h3>
+                <p data-en="Laptops, phones, accessories and useful technology for student life."
+                   data-sw="Laptop, simu, accessories na technology muhimu kwa maisha ya mwanafunzi.">
+                    Laptops, phones, accessories and useful technology for student life.
+                </p>
+            </div>
+
+            <div class="category reveal">
+                <div class="category-icon">👕</div>
+                <h3 data-en="Fashion & Lifestyle" data-sw="Fashion na Lifestyle">Fashion & Lifestyle</h3>
+                <p data-en="Clothes, shoes, bags and everyday lifestyle products."
+                   data-sw="Nguo, viatu, mabegi na bidhaa mbalimbali za matumizi ya kila siku.">
+                    Clothes, shoes, bags and everyday lifestyle products.
+                </p>
+            </div>
+
+            <div class="category reveal">
+                <div class="category-icon">🧑‍💻</div>
+                <h3 data-en="Student Services" data-sw="Huduma za Wanafunzi">Student Services</h3>
+                <p data-en="Design, photography, typing, tutoring, coding and other student skills."
+                   data-sw="Design, photography, typing, tutoring, coding na skills nyingine za wanafunzi.">
+                    Design, photography, typing, tutoring, coding and other student skills.
+                </p>
+            </div>
+
+            <div class="category reveal">
+                <div class="category-icon">🏠</div>
+                <h3 data-en="Accommodation" data-sw="Malazi">Accommodation</h3>
+                <p data-en="Discover rooms, hostels and accommodation opportunities around student communities."
+                   data-sw="Gundua rooms, hostels na fursa za malazi karibu na student communities.">
+                    Discover rooms, hostels and accommodation opportunities around student communities.
+                </p>
+            </div>
+
+            <div class="category reveal">
+                <div class="category-icon">💼</div>
+                <h3 data-en="Jobs & Gigs" data-sw="Kazi na Gigs">Jobs & Gigs</h3>
+                <p data-en="Find part-time work, gigs and opportunities that can match your skills."
+                   data-sw="Pata kazi za muda, gigs na fursa zinazoweza kuendana na skills zako.">
+                    Find part-time work, gigs and opportunities that can match your skills.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ================= HOW IT WORKS ================= -->
+
+<section id="how">
+    <div class="container">
+
+        <div class="reveal">
+            <div class="section-label"
+                 data-en="HOW IT WORKS"
+                 data-sw="INAVYOFANYA KAZI">
+                HOW IT WORKS
+            </div>
+
+            <h2 class="section-title"
+                data-en="Simple idea. Powerful connection."
+                data-sw="Wazo rahisi. Connection yenye nguvu.">
+                Simple idea. Powerful connection.
+            </h2>
+
+            <p class="section-text"
+               data-en="The concept is designed to keep the student experience simple, clear and convenient."
+               data-sw="Concept imeundwa kufanya experience ya mwanafunzi iwe rahisi, clear na convenient.">
+                The concept is designed to keep the student experience simple,
+                clear and convenient.
+            </p>
+        </div>
+
+
+        <div class="steps">
+
+            <div class="step reveal">
+                <div class="step-number">01 — DISCOVER</div>
+                <div class="step-icon">🔎</div>
+                <h3 data-en="Find What You Need" data-sw="Pata Unachohitaji">Find What You Need</h3>
+                <p data-en="Search and discover products, services, accommodation and opportunities relevant to student life."
+                   data-sw="Tafuta na gundua bidhaa, huduma, malazi na fursa zinazohusiana na maisha ya mwanafunzi.">
+                    Search and discover products, services, accommodation and opportunities relevant to student life.
+                </p>
+            </div>
+
+            <div class="step reveal">
+                <div class="step-number">02 — CONNECT</div>
+                <div class="step-icon">🤝</div>
+                <h3 data-en="Connect With Students" data-sw="Ungana na Wanafunzi">Connect With Students</h3>
+                <p data-en="Connect buyers, sellers and service providers through a student-focused environment."
+                   data-sw="Waunganishe buyers, sellers na service providers katika mazingira maalumu kwa wanafunzi.">
+                    Connect buyers, sellers and service providers through a student-focused environment.
+                </p>
+            </div>
+
+            <div class="step reveal">
+                <div class="step-number">03 — CREATE VALUE</div>
+                <div class="step-icon">✨</div>
+                <h3 data-en="Create Value" data-sw="Tengeneza Thamani">Create Value</h3>
+                <p data-en="Turn unused items, skills and ideas into useful opportunities for yourself and others."
+                   data-sw="Geuza vitu usivyotumia, skills na ideas kuwa fursa zenye manufaa kwako na kwa wengine.">
+                    Turn unused items, skills and ideas into useful opportunities for yourself and others.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ================= FOR BUYERS & SELLERS ================= -->
+
+<section>
+    <div class="container">
+
+        <div class="reveal">
+            <div class="section-label"
+                 data-en="FOR EVERY STUDENT"
+                 data-sw="KWA KILA MWANAFUNZI">
+                FOR EVERY STUDENT
+            </div>
+
+            <h2 class="section-title"
+                data-en="Whether you are looking for something or offering something."
+                data-sw="Iwe unatafuta kitu au una kitu cha kutoa.">
+                Whether you are looking for something or offering something.
+            </h2>
+        </div>
+
+
+        <div class="audience-grid">
+
+            <div class="audience reveal">
+                <h3>🛍️ <span data-en="For Buyers" data-sw="Kwa Wanunuzi">For Buyers</span></h3>
+
+                <p data-en="Find useful things and services without searching everywhere."
+                   data-sw="Pata vitu na huduma muhimu bila kutafuta kila sehemu.">
+                    Find useful things and services without searching everywhere.
+                </p>
+
+                <div class="check-list">
+                    <div class="check"><span>✓</span> <span data-en="Discover student-friendly products" data-sw="Gundua bidhaa zinazofaa kwa students">Discover student-friendly products</span></div>
+                    <div class="check"><span>✓</span> <span data-en="Compare available options" data-sw="Linganisha options zilizopo">Compare available options</span></div>
+                    <div class="check"><span>✓</span> <span data-en="Find useful student services" data-sw="Pata huduma muhimu za students">Find useful student services</span></div>
+                    <div class="check"><span>✓</span> <span data-en="Connect directly with sellers" data-sw="Ungana moja kwa moja na sellers">Connect directly with sellers</span></div>
+                </div>
+            </div>
+
+
+            <div class="audience reveal">
+                <h3>💡 <span data-en="For Sellers & Creators" data-sw="Kwa Sellers na Creators">For Sellers & Creators</span></h3>
+
+                <p data-en="Your product, skill or service can become valuable to another student."
+                   data-sw="Bidhaa, skill au huduma yako inaweza kuwa na thamani kwa mwanafunzi mwingine.">
+                    Your product, skill or service can become valuable to another student.
+                </p>
+
+                <div class="check-list">
+                    <div class="check"><span>✓</span> <span data-en="Showcase your products" data-sw="Onyesha bidhaa zako">Showcase your products</span></div>
+                    <div class="check"><span>✓</span> <span data-en="Promote your skills" data-sw="Tangaza skills zako">Promote your skills</span></div>
+                    <div class="check"><span>✓</span> <span data-en="Reach a student-focused audience" data-sw="Fikia audience ya wanafunzi">Reach a student-focused audience</span></div>
+                    <div class="check"><span>✓</span> <span data-en="Turn skills into opportunities" data-sw="Geuza skills kuwa fursa">Turn skills into opportunities</span></div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ================= FOUNDER ================= -->
+
+<section id="founder">
+    <div class="container founder-grid">
+
+        <div class="founder-photo-wrap reveal">
+            <img src="ibn-haico.jpg"
+                 alt="Hafidhi Iddi — Founder of Student Marketplace"
+                 class="founder-photo">
+
+            <div class="founder-tag">
+                <strong>HAFIDHI IDDI</strong>
+                <span>Founder & Creator</span>
+            </div>
+        </div>
+
+
+        <div class="reveal">
+
+            <div class="section-label"
+                 data-en="THE FOUNDER"
+                 data-sw="MWANZILISHI">
+                THE FOUNDER
+            </div>
+
+            <h2 class="section-title">
+                <span data-en="A student idea,"
+                      data-sw="Wazo la mwanafunzi,">
+                    A student idea,
+                </span>
+                <span class="gradient-text"
+                      data-en="built for students."
+                      data-sw="lililojengwa kwa wanafunzi.">
+                    built for students.
+                </span>
+            </h2>
+
+            <p class="section-text"
+               data-en="Student Marketplace was imagined as a digital space where students can do more than simply consume — they can connect, exchange, create and discover opportunities."
+               data-sw="Student Marketplace ilifikiriwa kama digital space ambayo wanafunzi wanaweza kufanya zaidi ya kutumia tu — wanaweza ku-connect, kubadilishana, ku-create na kugundua fursa.">
+                Student Marketplace was imagined as a digital space where students
+                can do more than simply consume — they can connect, exchange, create
+                and discover opportunities.
+            </p>
+
+            <p class="section-text" style="margin-top:18px"
+               data-en="The vision is to build something practical, accessible and useful — a platform that grows with the student community and responds to real student needs."
+               data-sw="Vision ni kujenga kitu practical, accessible na useful — platform inayokua pamoja na student community na kujibu mahitaji halisi ya wanafunzi.">
+                The vision is to build something practical, accessible and useful —
+                a platform that grows with the student community and responds to real student needs.
+            </p>
+
+            <div class="quote"
+                 data-en="Great platforms do not only connect people with products. They connect people with possibilities."
+                 data-sw="Platform nzuri haiwaunganishi watu na bidhaa pekee. Huwaunganisha watu na possibilities.">
+                Great platforms do not only connect people with products.
+                They connect people with possibilities.
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ================= VISION ================= -->
+
+<section class="vision">
+    <div class="container">
+
+        <div class="section-label reveal"
+             data-en="OUR VISION"
+             data-sw="VISION YETU">
+            OUR VISION
+        </div>
+
+        <div class="vision-card reveal">
+
+            <h3>
+                <span data-en="Making student life"
+                      data-sw="Kufanya maisha ya mwanafunzi">
+                    Making student life
+                </span>
+                <span class="gradient-text"
+                      data-en="more connected, more convenient and more opportunity-driven."
+                      data-sw="yawe connected zaidi, convenient zaidi na yenye fursa zaidi.">
+                    more connected, more convenient and more opportunity-driven.
+                </span>
+            </h3>
+
+            <p data-en="We imagine a future where a student does not have to look everywhere to find what they need — and where every student has a chance to turn what they have into value."
+               data-sw="Tunaona future ambayo mwanafunzi hahitaji kutafuta kila sehemu ili kupata anachohitaji — na kila mwanafunzi anapata nafasi ya kugeuza alichonacho kuwa value.">
+                We imagine a future where a student does not have to look everywhere
+                to find what they need — and where every student has a chance to turn
+                what they have into value.
+            </p>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ================= FAQ ================= -->
+
+<section id="faq">
+    <div class="container">
+
+        <div style="text-align:center" class="reveal">
+            <div class="section-label">FAQ</div>
+
+            <h2 class="section-title" style="margin:0 auto 15px"
+                data-en="Questions students may have."
+                data-sw="Maswali ambayo students wanaweza kuwa nayo.">
+                Questions students may have.
+            </h2>
+
+            <p class="section-text" style="margin:auto"
+               data-en="A quick explanation of the idea behind Student Marketplace."
+               data-sw="Maelezo mafupi kuhusu wazo la Student Marketplace.">
+                A quick explanation of the idea behind Student Marketplace.
+            </p>
+        </div>
+
+
+        <div class="faq-list">
+
+            <div class="faq reveal">
+                <button class="faq-question">
+                    <span data-en="What is Student Marketplace?"
+                          data-sw="Student Marketplace ni nini?">
+                        What is Student Marketplace?
+                    </span>
+                    <span>+</span>
+                </button>
+
+                <div class="faq-answer">
+                    <p data-en="It is a student-focused marketplace concept designed to connect students with products, services, accommodation and opportunities."
+                       data-sw="Ni concept ya marketplace maalumu kwa wanafunzi inayolenga kuwaunganisha na bidhaa, huduma, malazi na fursa.">
+                        It is a student-focused marketplace concept designed to connect students
+                        with products, services, accommodation and opportunities.
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="faq reveal">
+                <button class="faq-question">
+                    <span data-en="Is it only for buying products?"
+                          data-sw="Ni kwa ajili ya kununua bidhaa tu?">
+                        Is it only for buying products?
+                    </span>
+                    <span>+</span>
+                </button>
+
+                <div class="faq-answer">
+                    <p data-en="No. The idea goes beyond products. It can include student services, accommodation, jobs, gigs and other opportunities."
+                       data-sw="Hapana. Wazo linaenda zaidi ya bidhaa. Linaweza kujumuisha student services, accommodation, jobs, gigs na fursa nyingine.">
+                        No. The idea goes beyond products. It can include student services,
+                        accommodation, jobs, gigs and other opportunities.
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="faq reveal">
+                <button class="faq-question">
+                    <span data-en="Who is the platform designed for?"
+                          data-sw="Platform imeundwa kwa ajili ya nani?">
+                        Who is the platform designed for?
+                    </span>
+                    <span>+</span>
+                </button>
+
+                <div class="faq-answer">
+                    <p data-en="It is primarily designed around students and the businesses, creators and service providers that support student communities."
+                       data-sw="Imejengwa hasa kwa wanafunzi pamoja na businesses, creators na service providers wanaohudumia student communities.">
+                        It is primarily designed around students and the businesses,
+                        creators and service providers that support student communities.
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="faq reveal">
+                <button class="faq-question">
+                    <span data-en="Can students sell their own products?"
+                          data-sw="Students wataweza kuuza bidhaa zao?">
+                        Can students sell their own products?
+                    </span>
+                    <span>+</span>
+                </button>
+
+                <div class="faq-answer">
+                    <p data-en="That is one of the core ideas: students can potentially list products or services and connect with interested buyers."
+                       data-sw="Hilo ni moja ya mawazo makuu: students wanaweza kuweka bidhaa au services zao na ku-connect na buyers wanaovutiwa.">
+                        That is one of the core ideas: students can potentially list products
+                        or services and connect with interested buyers.
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="faq reveal">
+                <button class="faq-question">
+                    <span data-en="Is the platform currently open for registration?"
+                          data-sw="Platform iko tayari kwa registration?">
+                        Is the platform currently open for registration?
+                    </span>
+                    <span>+</span>
+                </button>
+
+                <div class="faq-answer">
+                    <p data-en="This website is currently an introduction to the Student Marketplace concept. Registration and the full marketplace experience can be introduced in a future phase."
+                       data-sw="Website hii kwa sasa ni introduction ya concept ya Student Marketplace. Registration na marketplace kamili vinaweza kuletwa kwenye phase inayofuata.">
+                        This website is currently an introduction to the Student Marketplace concept.
+                        Registration and the full marketplace experience can be introduced in a future phase.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ================= CTA ================= -->
+
+<section class="cta">
+    <div class="container">
+
+        <div class="cta-card reveal">
+
+            <h2>
+                <span data-en="The future of student connection"
+                      data-sw="Future ya student connection">
+                    The future of student connection
+                </span>
+                <br>
+                <span class="gradient-text"
+                      data-en="starts with an idea."
+                      data-sw="inaanza na wazo.">
+                    starts with an idea.
+                </span>
+            </h2>
+
+            <p data-en="Student Marketplace is an idea built around one simple belief: students already have needs, skills, products and opportunities. They just need a better way to connect them."
+               data-sw="Student Marketplace imejengwa kutokana na belief moja rahisi: students tayari wana mahitaji, skills, bidhaa na opportunities. Wanahitaji tu njia bora zaidi ya kuziunganisha.">
+                Student Marketplace is an idea built around one simple belief:
+                students already have needs, skills, products and opportunities.
+                They just need a better way to connect them.
+            </p>
+
+            <a href="#home" class="btn btn-primary">
+                🚀
+                <span data-en="Explore the Vision" data-sw="Gundua Vision">Explore the Vision</span>
+            </a>
+
+        </div>
+
+    </div>
+</section>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+    <div class="container footer-grid">
+
+        <div class="footer-copy">
+            © <span id="year"></span> Student Marketplace.
+            <span data-en="Built for student possibilities."
+                  data-sw="Imejengwa kwa possibilities za wanafunzi.">
+                Built for student possibilities.
+            </span>
+        </div>
+
+        <div class="footer-links">
+            <a href="#about" data-en="About" data-sw="Kuhusu">About</a>
+            <a href="#categories" data-en="Categories" data-sw="Makundi">Categories</a>
+            <a href="#founder" data-en="Founder" data-sw="Mwanzilishi">Founder</a>
+            <a href="#faq">FAQ</a>
+        </div>
+
+    </div>
+</footer>
+
+
+<button class="scroll-top" id="scrollTop" aria-label="Scroll to top">↑</button>
+
+<!-- ================= COMING SOON MODAL ================= -->
+
+<div class="coming-overlay" id="comingOverlay">
+
+    <div class="coming-modal">
+
+        <div class="coming-icon">
+            🚀
+        </div>
+
+        <h3 id="comingTitle">
+            Coming Soon
+        </h3>
+
+        <p id="comingText">
+            Student Marketplace is currently being prepared.
+            Registration and the full marketplace experience
+            will be available soon.
+        </p>
+
+        <button class="coming-close" onclick="closeComingSoon()">
+            <span id="comingCloseText">Got it</span>
+        </button>
+
+    </div>
+
+</div>
+<script>
+/* =========================================================
+   STUDENT MARKETPLACE JAVASCRIPT
+   ========================================================= */
+
+const body = document.body;
+const header = document.getElementById("header");
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
+const themeBtn = document.getElementById("themeBtn");
+const langBtn = document.getElementById("langBtn");
+const scrollTop = document.getElementById("scrollTop");
+
+let currentLanguage = "en";
+
+
+/* ================= MOBILE MENU ================= */
+
+menuBtn.addEventListener("click", () => {
+    navLinks.classList.toggle("open");
+
+    menuBtn.textContent = navLinks.classList.contains("open")
+        ? "✕"
+        : "☰";
+});
+
+document.querySelectorAll(".nav-links a").forEach(link => {
+    link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuBtn.textContent = "☰";
+    });
+});
+
+
+/* ================= HEADER SCROLL ================= */
+
+window.addEventListener("scroll", () => {
+
+    if(window.scrollY > 30){
+        header.classList.add("scrolled");
+    }else{
+        header.classList.remove("scrolled");
+    }
+
+    if(window.scrollY > 500){
+        scrollTop.classList.add("show");
+    }else{
+        scrollTop.classList.remove("show");
+    }
+});
+
+
+/* ================= SCROLL TOP ================= */
+
+scrollTop.addEventListener("click", () => {
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+});
+
+
+/* ================= DARK / LIGHT MODE ================= */
+
+themeBtn.addEventListener("click", () => {
+
+    body.classList.toggle("light");
+
+    if(body.classList.contains("light")){
+        themeBtn.textContent = "☀";
+        localStorage.setItem("studentMarketplaceTheme","light");
+    }else{
+        themeBtn.textContent = "☾";
+        localStorage.setItem("studentMarketplaceTheme","dark");
+    }
+});
+
+const savedTheme = localStorage.getItem("studentMarketplaceTheme");
+
+if(savedTheme === "light"){
+    body.classList.add("light");
+    themeBtn.textContent = "☀";
+}
+
+
+/* ================= LANGUAGE SWITCH ================= */
+
+function updateLanguage(){
+
+    document.querySelectorAll("[data-en]").forEach(element => {
+
+        const text = element.getAttribute(
+            currentLanguage === "en" ? "data-en" : "data-sw"
+        );
+
+        if(text){
+            element.textContent = text;
+        }
+
+    });
+
+    langBtn.textContent = currentLanguage === "en"
+        ? "SW"
+        : "EN";
+
+    document.documentElement.lang = currentLanguage === "en"
+        ? "en"
+        : "sw";
+}
+
+langBtn.addEventListener("click", () => {
+
+    currentLanguage = currentLanguage === "en"
+        ? "sw"
+        : "en";
+
+    updateLanguage();
+});
+
+
+/* ================= SCROLL REVEAL ================= */
+
+const revealElements = document.querySelectorAll(".reveal");
+
+const revealObserver = new IntersectionObserver(
+    (entries, observer) => {
+
+        entries.forEach(entry => {
+
+            if(entry.isIntersecting){
+
+                entry.target.classList.add("show");
+
+                observer.unobserve(entry.target);
+            }
+
+        });
+
+    },
+    {
+        threshold:.12
+    }
+);
+
+revealElements.forEach(element => {
+    revealObserver.observe(element);
+});
+
+
+/* ================= COUNTERS ================= */
+
+const counters = document.querySelectorAll("[data-count]");
+let counterStarted = false;
+
+function startCounters(){
+
+    if(counterStarted) return;
+
+    const statsSection = document.querySelector(".stats");
+
+    const rect = statsSection.getBoundingClientRect();
+
+    if(rect.top < window.innerHeight - 100){
+
+        counterStarted = true;
+
+        counters.forEach(counter => {
+
+            const target = Number(counter.dataset.count);
+            let current = 0;
+
+            const duration = 1300;
+            const increment = target / (duration / 16);
+
+            const timer = setInterval(() => {
+
+                current += increment;
+
+                if(current >= target){
+
+                    current = target;
+                    clearInterval(timer);
+
+                }
+
+                counter.textContent =
+                    Math.floor(current) +
+                    (target >= 100 ? "+" : "");
+
+            },16);
+
+        });
+
+    }
+}
+
+window.addEventListener("scroll",startCounters);
+startCounters();
+
+
+/* ================= FAQ ================= */
+
+document.querySelectorAll(".faq-question").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        const faq = button.parentElement;
+        const answer = faq.querySelector(".faq-answer");
+
+        document.querySelectorAll(".faq").forEach(item => {
+
+            if(item !== faq){
+
+                item.classList.remove("active");
+
+                item.querySelector(".faq-answer").style.maxHeight = null;
+
+            }
+
+        });
+
+        faq.classList.toggle("active");
+
+        if(faq.classList.contains("active")){
+            answer.style.maxHeight = answer.scrollHeight + "px";
+        }else{
+            answer.style.maxHeight = null;
+        }
+
+    });
+
+});
+
+
+/* ================= ACTIVE NAV ================= */
+
+const sections = document.querySelectorAll("section[id]");
+const navItems = document.querySelectorAll(".nav-links a");
+
+const navObserver = new IntersectionObserver(
+    entries => {
+
+        entries.forEach(entry => {
+
+            if(entry.isIntersecting){
+
+                navItems.forEach(item => {
+
+                    item.style.color = "";
+
+                    if(item.getAttribute("href") === "#" + entry.target.id){
+                        item.style.color = "var(--text)";
+                    }
+
+                });
+
+            }
+
+        });
+
+    },
+    {
+        rootMargin:"-30% 0px -60% 0px"
+    }
+);
+
+sections.forEach(section => {
+    navObserver.observe(section);
+});
+
+
+/* ================= CURRENT YEAR ================= */
+
+document.getElementById("year").textContent =
+    new Date().getFullYear();
+
+
+/* ================= IMAGE FALLBACK ================= */
+
+const founderImage = document.querySelector(".founder-photo");
+
+founderImage.addEventListener("error", () => {
+
+    founderImage.style.display = "none";
+
+    const wrapper = founderImage.parentElement;
+
+    wrapper.style.minHeight = "300px";
+    wrapper.style.borderRadius = "30px";
+    wrapper.style.background =
+        "linear-gradient(135deg,rgba(108,99,255,.25),rgba(32,217,255,.12))";
+    wrapper.style.display = "grid";
+    wrapper.style.placeItems = "center";
+
+    const fallback = document.createElement("div");
+
+    fallback.innerHTML = `
+        <div style="
+            width:100px;
+            height:100px;
+            border-radius:50%;
+            display:grid;
+            place-items:center;
+            background:linear-gradient(135deg,#6c63ff,#20d9ff);
+            font-size:2rem;
+            font-weight:900;
+            color:white;
+        ">HI</div>
+    `;
+
+    wrapper.appendChild(fallback);
+
+});
+
+
+/* ================= INITIALIZATION ================= */
+
+updateLanguage();
+
+  /* ================= COMING SOON ================= */
+
+const comingOverlay = document.getElementById("comingOverlay");
+
+function showComingSoon(){
+
+    comingOverlay.classList.add("show");
+
+    if(currentLanguage === "sw"){
+
+        document.getElementById("comingTitle").textContent =
+            "Inakuja Hivi Karibuni";
+
+        document.getElementById("comingText").textContent =
+            "Student Marketplace bado inaandaliwa. " +
+            "Usajili na huduma kamili za marketplace " +
+            "zitapatikana hivi karibuni.";
+
+        document.getElementById("comingCloseText").textContent =
+            "Sawa";
+
+    }else{
+
+        document.getElementById("comingTitle").textContent =
+            "Coming Soon";
+
+        document.getElementById("comingText").textContent =
+            "Student Marketplace is currently being prepared. " +
+            "Registration and the full marketplace experience " +
+            "will be available soon.";
+
+        document.getElementById("comingCloseText").textContent =
+            "Got it";
+    }
+
+}
+
+function closeComingSoon(){
+
+    comingOverlay.classList.remove("show");
+
+}
+
+
+/* Close when clicking outside */
+
+comingOverlay.addEventListener("click", function(e){
+
+    if(e.target === comingOverlay){
+        closeComingSoon();
+    }
+
+});
+
+
+/* Close with Escape */
+
+document.addEventListener("keydown", function(e){
+
+    if(e.key === "Escape"){
+        closeComingSoon();
+    }
+
+});
+
+</script>
+
+</body>
+</html>
